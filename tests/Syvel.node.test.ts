@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import type { IExecuteFunctions, INodeProperties } from 'n8n-workflow';
 import { Syvel } from '../nodes/Syvel/Syvel.node';
 import { SyvelApi } from '../credentials/SyvelApi.credentials';
