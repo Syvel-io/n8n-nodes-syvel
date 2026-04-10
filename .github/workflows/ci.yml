@@ -41,3 +41,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Validate build
+        run: npm run validate:build

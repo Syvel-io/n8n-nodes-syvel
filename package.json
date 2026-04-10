@@ -33,7 +33,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepublishOnly": "npm run build"
+    "validate:build": "node scripts/validate-build.js",
+    "prepublishOnly": "npm run build && npm run validate:build"
   },
   "files": [
     "dist",
