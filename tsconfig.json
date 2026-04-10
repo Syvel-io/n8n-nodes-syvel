@@ -15,5 +15,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": ["credentials/**/*.ts", "nodes/**/*.ts"]
+  "include": ["credentials/**/*.ts", "nodes/**/*.ts", "tests/**/*.ts"]
 }
