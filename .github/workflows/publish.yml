@@ -10,12 +10,14 @@ jobs:
   publish:
     name: Publish to npm
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
 
     # Ensure the version in package.json matches the release tag
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -43,6 +45,6 @@ jobs:
           fi
 
       - name: Publish
-        run: npm publish --access public
+        run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
