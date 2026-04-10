@@ -1,50 +1,38 @@
-name: Publish to npm
+name: Release
 
-# Triggered when a GitHub Release is published (e.g. tag v0.2.0).
-# Create a release via: GitHub UI → Releases → Draft a new release → tag vX.Y.Z
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 
 jobs:
-  publish:
-    name: Publish to npm
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
+      contents: write       # to create tags and push commits
+      pull-requests: write  # to open and update the Release PR
+      id-token: write       # for npm provenance
 
-    # Ensure the version in package.json matches the release tag
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Full history needed for changesets to detect what changed
+          fetch-depth: 0
 
       - uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: npm
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
-
-      - name: Test
-        run: npm test
-
-      - name: Build
-        run: npm run build
-
-      - name: Verify package.json version matches release tag
-        run: |
-          PKG_VERSION="v$(node -p "require('./package.json').version")"
-          TAG_VERSION="${{ github.ref_name }}"
-          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
-            echo "::error::package.json version ($PKG_VERSION) does not match release tag ($TAG_VERSION)"
-            exit 1
-          fi
-
-      - name: Publish
-        run: npm publish --access public --provenance
+      - name: Create Release PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          publish: npm run release
+          commit: "chore: release"
+          title: "chore: release"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
