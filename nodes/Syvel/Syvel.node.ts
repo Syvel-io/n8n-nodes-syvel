@@ -130,7 +130,7 @@ export class Syvel implements INodeType {
 						type: 'number',
 						default: 3000,
 						description:
-							'Maximum time in milliseconds to wait for the Syvel API to respond.',
+							'Maximum time in milliseconds to wait for the Syvel API to respond',
 						typeOptions: {
 							minValue: 100,
 							maxValue: 30000,

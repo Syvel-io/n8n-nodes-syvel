@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { IExecuteFunctions, INodeProperties } from 'n8n-workflow';
+import { describe, it, expect, vi } from 'vitest';
+import type { IExecuteFunctions, INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 import { Syvel } from '../nodes/Syvel/Syvel.node';
 import { SyvelApi } from '../credentials/SyvelApi.credentials';
 
@@ -89,16 +89,18 @@ describe('Syvel node — description', () => {
 	it('exposes both checkEmail and checkDomain operations', () => {
 		const operationProp = node.description.properties.find(
 			(p: INodeProperties) => p.name === 'operation',
-		) as INodeProperties & { options: Array<{ value: string }> };
-		const values = operationProp.options.map((o) => o.value);
+		) as INodeProperties;
+		const values = (operationProp.options as INodePropertyOptions[]).map((o) => o.value);
 		expect(values).toEqual(['checkEmail', 'checkDomain']);
 	});
 
 	it('has a failOpen option defaulting to true', () => {
 		const optionsProp = node.description.properties.find(
 			(p: INodeProperties) => p.name === 'options',
-		) as INodeProperties & { options: Array<{ name: string; default: unknown }> };
-		const failOpenOption = optionsProp.options.find((o) => o.name === 'failOpen');
+		) as INodeProperties;
+		const failOpenOption = (optionsProp.options as INodeProperties[]).find(
+			(o) => o.name === 'failOpen',
+		);
 		expect(failOpenOption?.default).toBe(true);
 	});
 
