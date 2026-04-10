@@ -19,7 +19,7 @@ In your n8n instance, go to **Settings → Community Nodes → Install** and ent
 n8n-nodes-syvel
 ```
 
-You will need a Syvel API key. Get one for free at [syvel.io/dashboard](https://www.syvel.io/dashboard).
+You will need a Syvel API key. Get one for free at [dashboard.syvel.io](https://dashboard.syvel.io).
 
 ---
 
@@ -38,7 +38,7 @@ You will need a Syvel API key. Get one for free at [syvel.io/dashboard](https://
 
 | Field | Description |
 |---|---|
-| **API Key** | Your Syvel API key (`sv_...`). Found in the [Syvel dashboard](https://www.syvel.io/dashboard) under **API Keys**. |
+| **API Key** | Your Syvel API key (`sv_...`). Found in the [Syvel dashboard](https://dashboard.syvel.io) under **API Keys**. |
 
 Once saved, n8n will verify the credential against the Syvel API automatically.
 
