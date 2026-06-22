@@ -15,7 +15,7 @@ jobs:
       id-token: write       # for npm provenance
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           # Full history needed for changesets to detect what changed
           fetch-depth: 0
